@@ -1,5 +1,5 @@
 🔗 Live Demo: View on Vercel
-https://carfrontend-ptv4v8k65-sidneys-projects-2af13f64.vercel.app/
+https://carfrontend-rust.vercel.app
 
 ✨ Features
 
