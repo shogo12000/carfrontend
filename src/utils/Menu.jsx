@@ -3,18 +3,52 @@ import { NavLink, Outlet } from "react-router";
 export default function Menu() {
   return (
     <>
-      <nav className="w-full h-15 flex justify-between items-center p-4 box-border bg-[var(--color-base-200)]">
-        <div className="flex gap-5">
-          <NavLink to="/" end>
-            Home
-          </NavLink>
-          <NavLink to="/cars" end>
-            Cars
-          </NavLink>
+      <nav className="w-full h-15 flex justify-center items-center p-4 box-border bg-[var(--color-base-200)]">
+        <div className="w-full max-w-screen-xl flex justify-between items-center">
+          <div className="flex">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                `inline-block w-[80px] text-center transition-colors duration-200 
+              ${
+                isActive
+                  ? "font-bold text-green-600"
+                  : "font-normal text-gray-700 hover:text-green-500"
+              }`
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/cars"
+              end
+              className={({ isActive }) =>
+                `inline-block w-[80px] text-center transition-colors duration-200 
+              ${
+                isActive
+                  ? "font-bold text-green-600"
+                  : "font-normal text-gray-700 hover:text-green-500"
+              }`
+              }
+            >
+              Cars
+            </NavLink>
+          </div>
+          <NavLink            
+            to="/login"  
+            className={({ isActive }) =>
+              `inline-block w-[80px] text-center transition-colors duration-200 
+              ${
+                isActive
+                  ? "font-bold text-green-600"
+                  : "font-normal text-gray-700 hover:text-green-500"
+              }`
+            }
+          >
+            Login
+          </NavLink> 
         </div>
-        <NavLink to="/login" end>
-          Login
-        </NavLink>
       </nav>
       <Outlet />
     </>
