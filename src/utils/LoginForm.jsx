@@ -21,7 +21,8 @@ export default function LoginForm({ChangeForm}) {
       />
 
       <div className="flex justify-end">
-        <button onClick={ChangeForm}>Register</button>
+        <button onClick={ChangeForm}
+        className="hover:underline transition-all duration-200">Register</button>
       </div>
     </fieldset>
   );

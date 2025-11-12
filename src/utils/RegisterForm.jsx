@@ -2,7 +2,7 @@ import ComptButton from "../components/ComponentButton";
 import CompFieldSet from "../components/ComponentFieldSet";
 import { Link } from "react-router";
 
-export default function RegisterForm({ChangeForm}) {
+export default function RegisterForm({ ChangeForm }) {
   return (
     <fieldset className="fieldset gap-4 bg-base-200 border-base-300 rounded-box w-xs border p-4">
       <legend className="fieldset-legend">Register</legend>
@@ -29,7 +29,12 @@ export default function RegisterForm({ChangeForm}) {
       />
 
       <div className="flex justify-end">
-        <button onClick={ChangeForm}>Login</button>
+        <button
+          onClick={ChangeForm}
+          className="hover:underline transition-all duration-200"
+        >
+          Login
+        </button>
       </div>
     </fieldset>
   );
