@@ -69,14 +69,14 @@ export default function RegisterForm({ ChangeForm }) {
         return alert(data.message || "Erro ao registrar");
       }
 
-      alert("User registered successfully!");
-
       setRegisterForm({
         email: "",
         username: "",
         password: "",
         confirmPassword: "",
       });
+
+      alert("User registered successfully!");
     } catch (err) {
       console.error(err);
       alert("Erro no servidor");
