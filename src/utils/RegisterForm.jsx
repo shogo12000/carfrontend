@@ -47,8 +47,7 @@ export default function RegisterForm({ ChangeForm }) {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/cars/register", {
- 
+      const res = await fetch("https://project-car-back-end.vercel.app/cars/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
