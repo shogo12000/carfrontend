@@ -70,6 +70,7 @@ export default function RegisterForm({ ChangeForm }) {
       }
 
       alert("User registered successfully!");
+
       setRegisterForm({
         email: "",
         username: "",
@@ -95,6 +96,7 @@ export default function RegisterForm({ ChangeForm }) {
         name={"email"}
         Type={"email"}
         PlaceHolder={"Email"}
+        value={registerForm.email}
         onChange={(e) => onChange(e)}
       />
 
@@ -103,13 +105,16 @@ export default function RegisterForm({ ChangeForm }) {
         name={"username"}
         Type={"text"}
         PlaceHolder={"UserName"}
+        value={registerForm.username}
         onChange={(e) => onChange(e)}
       />
+
       <CompFieldSet
         Label={"Password"}
         name={"password"}
         Type={"password"}
         PlaceHolder={"Password"}
+        value={registerForm.password}
         onChange={(e) => onChange(e)}
       />
 
@@ -118,6 +123,7 @@ export default function RegisterForm({ ChangeForm }) {
         name={"confirmPassword"}
         Type={"password"}
         PlaceHolder={"Password"}
+        value={registerForm.confirmPassword}
         onChange={(e) => onChange(e)}
       />
 
