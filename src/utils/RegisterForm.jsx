@@ -47,17 +47,20 @@ export default function RegisterForm({ ChangeForm }) {
     }
 
     try {
-      const res = await fetch("https://project-car-back-end.vercel.app/cars/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: registerForm.email,
-          username: registerForm.username,
-          password: registerForm.password,
-        }),
-      });
+      const res = await fetch(
+        "https://project-car-back-end.vercel.app/cars/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: registerForm.email,
+            username: registerForm.username,
+            password: registerForm.password,
+          }),
+        }
+      );
 
       const data = await res.json();
 
@@ -66,8 +69,13 @@ export default function RegisterForm({ ChangeForm }) {
         return alert(data.message || "Erro ao registrar");
       }
 
-      alert("User registered!");
-      console.log("User saved:", data);
+      alert("User registered successfully!");
+      setRegisterForm({
+        email: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+      });
     } catch (err) {
       console.error(err);
       alert("Erro no servidor");
