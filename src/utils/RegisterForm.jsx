@@ -11,32 +11,6 @@ export default function RegisterForm({ ChangeForm }) {
     confirmPassword: "",
   });
 
-  useEffect(() => {
-    const register = async () => {
-      try {
-        const res = await fetch(
-          "https://project-car-back-end.vercel.app/health",
-          {
-            //const res = await fetch("http://localhost:3000/health", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-
-        const data = await res.json();
-        console.log(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    register();
-  }, []);
-
   const handleRegister = async () => {
     if (registerForm.password.trim().length < 4) {
       return alert("Password must be at least 5 characters long.");
