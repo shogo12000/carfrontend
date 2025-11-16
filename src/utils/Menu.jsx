@@ -60,7 +60,8 @@ export default function Menu() {
             )}
           </div>
           {user ? (
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout}
+            className="transition-all duration-200 hover:text-green-500">Logout</button>
           ) : (
             <NavLink
               to="/login"

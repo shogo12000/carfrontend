@@ -17,12 +17,8 @@ export default function LoginForm({ ChangeForm }) {
     if (user) { 
       navigate("/mycars");
     }
-  }, [user]);
-
-  const check = async () => {
-    console.log(user);
-  }
-
+  }, [user]); 
+  
   const handleLogin = async () => {
     console.log(loginForm);
 
@@ -89,7 +85,7 @@ export default function LoginForm({ ChangeForm }) {
         >
           Register
         </button>
-        <button onClick={()=> check()}>checkUser</button>
+ 
       </div>
     </fieldset>
   );
