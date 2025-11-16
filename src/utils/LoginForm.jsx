@@ -14,17 +14,21 @@ export default function LoginForm({ ChangeForm }) {
     console.log(loginForm);
 
     try {
-      const res = await fetch("https://project-car-back-end.vercel.app/cars/login", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: loginForm.email,
-          password: loginForm.password,
-        }),
-      });
+      // const res = await fetch("http://localhost:3000/cars/login", {
+      const res = await fetch(
+        "https://project-car-back-end.vercel.app/cars/login",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: loginForm.email,
+            password: loginForm.password,
+          }),
+        }
+      );
 
       const data = await res.json();
 
