@@ -1,15 +1,15 @@
 import { NavLink, Outlet, useNavigate } from "react-router";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
- 
+
 export default function Menu() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = async()=>{
+  const handleLogout = async () => {
     await logout();
-    navigate("/login")
-  }
+    navigate("/login");
+  };
   return (
     <>
       <nav className="w-full h-15 flex justify-center items-center p-4 box-border bg-[var(--color-base-200)]">
@@ -60,7 +60,9 @@ export default function Menu() {
             )}
           </div>
           {user ? (
-            user
+            <>
+              {user} <button onClick={handleLogout}>Logout</button>
+            </>
           ) : (
             <NavLink
               to="/login"
@@ -74,7 +76,6 @@ export default function Menu() {
               }
             >
               Login
-              <button onClick={handleLogout}>Logout</button>
             </NavLink>
           )}
         </div>
