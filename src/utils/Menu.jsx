@@ -1,6 +1,10 @@
 import { NavLink, Outlet } from "react-router";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Menu() {
+  const { user } = useContext(AuthContext);
+
   return (
     <>
       <nav className="w-full h-15 flex justify-center items-center p-4 box-border bg-[var(--color-base-200)]">
@@ -35,19 +39,23 @@ export default function Menu() {
               Cars
             </NavLink>
           </div>
-          <NavLink            
-            to="/login"  
-            className={({ isActive }) =>
-              `inline-block w-[80px] text-center transition-colors duration-200 
+          {user ? (
+            user
+          ) : (
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `inline-block w-[80px] text-center transition-colors duration-200 
               ${
                 isActive
                   ? "font-bold text-green-600"
                   : "font-normal text-gray-700 hover:text-green-500"
               }`
-            }
-          >
-            Login
-          </NavLink> 
+              }
+            >
+              Login
+            </NavLink>
+          )}
         </div>
       </nav>
       <Outlet />

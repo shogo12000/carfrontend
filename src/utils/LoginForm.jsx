@@ -1,10 +1,11 @@
 import ComptButton from "../components/ComponentButton";
 import CompFieldSet from "../components/ComponentFieldSet";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext"; 
 
 export default function LoginForm({ ChangeForm }) {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
-
+  const { setUser } = useContext(AuthContext);
   const onChange = (e) => {
     const { name, value } = e.target;
     setLoginForm((prev) => ({ ...prev, [name]: value }));
@@ -14,10 +15,10 @@ export default function LoginForm({ ChangeForm }) {
     console.log(loginForm);
 
     try {
-      // const res = await fetch("http://localhost:3000/cars/login", {
-      const res = await fetch(
-        "https://project-car-back-end.vercel.app/cars/login",
-        {
+      const res = await fetch("http://localhost:3000/cars/login", {
+      // const res = await fetch(
+      //   "https://project-car-back-end.vercel.app/cars/login",
+      //   {
           method: "POST",
           credentials: "include",
           headers: {
@@ -31,8 +32,7 @@ export default function LoginForm({ ChangeForm }) {
       );
 
       const data = await res.json();
-
-      console.log(data);
+      setUser(data.username);
     } catch (err) {
       console.log(err);
       alert("Login Error");
