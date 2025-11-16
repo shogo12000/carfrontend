@@ -1,10 +1,15 @@
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
-
+ 
 export default function Menu() {
-  const { user } = useContext(AuthContext);
-  
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async()=>{
+    await logout();
+    navigate("/login")
+  }
   return (
     <>
       <nav className="w-full h-15 flex justify-center items-center p-4 box-border bg-[var(--color-base-200)]">
@@ -38,21 +43,21 @@ export default function Menu() {
             >
               Cars
             </NavLink>
-            {user && 
+            {user && (
               <NavLink
                 to="/mycars"
-              className={({ isActive }) =>
-                `inline-block w-[80px] text-center transition-colors duration-200 
+                className={({ isActive }) =>
+                  `inline-block w-[80px] text-center transition-colors duration-200 
               ${
                 isActive
                   ? "font-bold text-green-600"
                   : "font-normal text-gray-700 hover:text-green-500"
               }`
-              }
-            >
-              MyCars
-            </NavLink>
-            }
+                }
+              >
+                MyCars
+              </NavLink>
+            )}
           </div>
           {user ? (
             user
@@ -69,6 +74,7 @@ export default function Menu() {
               }
             >
               Login
+              <button onClick={handleLogout}>Logout</button>
             </NavLink>
           )}
         </div>
