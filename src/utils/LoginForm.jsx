@@ -13,10 +13,8 @@ export default function LoginForm({ ChangeForm }) {
     setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  useEffect(() => {
-    console.log(user, " lOGIMfORM")
-    if (user) {
-      console.log("loginForm")
+  useEffect(() => { 
+    if (user) { 
       navigate("/mycars");
     }
   }, [user]);
@@ -46,7 +44,7 @@ export default function LoginForm({ ChangeForm }) {
       );
 
       const data = await res.json();
-      console.log(data, "dataloginform");
+ 
       if (data.username) {
         setUser(data.username);
       }

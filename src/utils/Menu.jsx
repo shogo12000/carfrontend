@@ -4,7 +4,6 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Menu() {
   const { user } = useContext(AuthContext);
-
   
   return (
     <>

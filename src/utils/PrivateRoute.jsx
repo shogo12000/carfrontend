@@ -18,6 +18,5 @@ export default function PrivateRoute() {
     return <Navigate to="/login" replace />;
   }
 
-  console.log("passando no privateRoute");
   return <Outlet />;
 }
