@@ -26,8 +26,7 @@ export function AuthProvider({ children }) {
       if (res.ok) {
         setUser(data.user.username || null);
       } else {
-        setUser(null);
-        console.log(data);
+        setUser(null); 
         console.log("Anonymous User");
       }
     } catch (err) {
