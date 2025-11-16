@@ -9,8 +9,8 @@ export function AuthProvider({ children }) {
   const checkUserLogin = async () => {
     setLoading(true);
     try {
-      // const res = await fetch("http://localhost:3000/cars/login", {
-      const res = await fetch("http://localhost:3000/cars/userstatus", {
+      const res = await fetch("https://project-car-back-end.vercel.app/cars/login", {
+      // const res = await fetch("http://localhost:3000/cars/userstatus", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
