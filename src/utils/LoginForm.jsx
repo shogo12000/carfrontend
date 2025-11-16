@@ -37,7 +37,10 @@ export default function LoginForm({ ChangeForm }) {
       const data = await res.json();
 
       if (data.ok) {
-        setUser(data.username);
+        const userstatu = async ()=>{
+          await setUser(data.username);
+        }
+        userstatu();
         navigate("/mycars");
       }
     } catch (err) {
