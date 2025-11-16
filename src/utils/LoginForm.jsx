@@ -21,6 +21,10 @@ export default function LoginForm({ ChangeForm }) {
     }
   }, [user]);
 
+  const check = async () => {
+    console.log(user);
+  }
+
   const handleLogin = async () => {
     console.log(loginForm);
 
@@ -87,6 +91,7 @@ export default function LoginForm({ ChangeForm }) {
         >
           Register
         </button>
+        <button onClick={()=> check()}>checkUser</button>
       </div>
     </fieldset>
   );
