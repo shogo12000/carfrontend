@@ -5,6 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 export default function Menu() {
   const { user } = useContext(AuthContext);
 
+  
   return (
     <>
       <nav className="w-full h-15 flex justify-center items-center p-4 box-border bg-[var(--color-base-200)]">

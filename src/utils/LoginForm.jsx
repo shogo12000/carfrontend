@@ -14,7 +14,9 @@ export default function LoginForm({ ChangeForm }) {
   };
 
   useEffect(() => {
+    console.log(user, " lOGIMfORM")
     if (user) {
+      console.log("loginForm")
       navigate("/mycars");
     }
   }, [user]);
