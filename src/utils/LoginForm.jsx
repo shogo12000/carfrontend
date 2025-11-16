@@ -1,18 +1,23 @@
 import ComptButton from "../components/ComponentButton";
 import CompFieldSet from "../components/ComponentFieldSet";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 
 export default function LoginForm({ ChangeForm }) {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
-
   const onChange = (e) => {
     const { name, value } = e.target;
     setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/mycars");
+    }
+  }, [user]);
 
   const handleLogin = async () => {
     console.log(loginForm);
@@ -37,11 +42,7 @@ export default function LoginForm({ ChangeForm }) {
       const data = await res.json();
 
       if (data.ok) {
-        const userstatu = async ()=>{
-          await setUser(data.username);
-        }
-        userstatu();
-        navigate("/mycars");
+        setUser(data.username);
       }
     } catch (err) {
       console.log(err);
