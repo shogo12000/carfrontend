@@ -38,6 +38,21 @@ export default function Menu() {
             >
               Cars
             </NavLink>
+            {user && 
+              <NavLink
+                to="/mycars"
+              className={({ isActive }) =>
+                `inline-block w-[80px] text-center transition-colors duration-200 
+              ${
+                isActive
+                  ? "font-bold text-green-600"
+                  : "font-normal text-gray-700 hover:text-green-500"
+              }`
+              }
+            >
+              MyCars
+            </NavLink>
+            }
           </div>
           {user ? (
             user
