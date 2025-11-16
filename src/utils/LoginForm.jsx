@@ -46,7 +46,7 @@ export default function LoginForm({ ChangeForm }) {
       );
 
       const data = await res.json();
-
+      console.log(data, "dataloginform");
       if (data.ok) {
         setUser(data.username);
       }
