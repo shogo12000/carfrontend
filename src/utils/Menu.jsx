@@ -60,9 +60,9 @@ export default function Menu() {
             )}
           </div>
           {user ? (
-            <>
+            <nav>
               {user} <button onClick={handleLogout}>Logout</button>
-            </>
+            </nav>
           ) : (
             <NavLink
               to="/login"
