@@ -13,11 +13,12 @@ export default function Login() {
     checkUserLogin();
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      navigate("/mycars", { replace: true });
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/mycars", { replace: true });
+  //   }
+  // }, [user]);
+
   const activeRegister = () => {
     setRegister(!register);
   };
