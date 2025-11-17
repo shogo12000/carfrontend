@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
       const data = await res.json();
 
       if (res.ok) {
-        setUser(data.user.username || null);
+        setUser(data.user || null);
       } else {
         setUser(null);
         console.log("Anonymous User");
