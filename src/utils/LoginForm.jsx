@@ -3,6 +3,7 @@ import CompFieldSet from "../components/ComponentFieldSet";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
+import { logForm } from "./local";
 
 export default function LoginForm({ ChangeForm }) {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -18,14 +19,13 @@ export default function LoginForm({ ChangeForm }) {
       navigate("/mycars");
     }
   }, [user]); 
-  
+
   const handleLogin = async () => {
     console.log(loginForm);
 
-    try {
-      // const res = await fetch("http://localhost:3000/cars/login", {
+    try { 
       const res = await fetch(
-        "https://project-car-back-end.vercel.app/cars/login",
+        logForm,
         {
           method: "POST",
           credentials: "include",

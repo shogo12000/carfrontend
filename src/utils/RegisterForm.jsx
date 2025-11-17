@@ -1,6 +1,6 @@
 import ComptButton from "../components/ComponentButton";
 import CompFieldSet from "../components/ComponentFieldSet";
-
+import { regForm } from "./local";
 import { useEffect, useState } from "react";
 
 export default function RegisterForm({ ChangeForm }) {
@@ -20,10 +20,8 @@ export default function RegisterForm({ ChangeForm }) {
       return alert("Passwords do not match!");
     }
 
-    try {
-      //const res = await fetch("http://localhost:3000/cars/register", {
-      const res = await fetch(
-        "https://project-car-back-end.vercel.app/cars/register",
+    try {       const res = await fetch(
+        regForm,
         {
           method: "POST",
           headers: {
