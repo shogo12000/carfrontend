@@ -44,24 +44,43 @@ export default function Menu() {
               Cars
             </NavLink>
             {user && (
-              <NavLink
-                to="/mycars"
-                className={({ isActive }) =>
-                  `inline-block w-[80px] text-center transition-colors duration-200 
+              <>
+                <NavLink
+                  to="/mycars"
+                  className={({ isActive }) =>
+                    `inline-block w-[80px] text-center transition-colors duration-200 
               ${
                 isActive
                   ? "font-bold text-green-600"
                   : "font-normal text-gray-700 hover:text-green-500"
               }`
-                }
-              >
-                MyCars
-              </NavLink>
+                  }
+                >
+                  MyCars
+                </NavLink>
+                <NavLink
+                  to="/addcar"
+                  className={({ isActive }) =>
+                    `inline-block w-[80px] text-center transition-colors duration-200 
+              ${
+                isActive
+                  ? "font-bold text-green-600"
+                  : "font-normal text-gray-700 hover:text-green-500"
+              }`
+                  }
+                >
+                  AddCar
+                </NavLink>
+              </>
             )}
           </div>
           {user ? (
-            <button onClick={handleLogout}
-            className="transition-all duration-200 hover:text-green-500">Logout</button>
+            <button
+              onClick={handleLogout}
+              className="transition-all duration-200 hover:text-green-500"
+            >
+              Logout
+            </button>
           ) : (
             <NavLink
               to="/login"
