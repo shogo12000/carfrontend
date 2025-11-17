@@ -1,15 +1,140 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { allCars } from "../utils/local";
+import TypeSelect from "../components/TypeSelect";
+import ComptButton from "../components/ComponentButton";
+import CompFieldSet from "../components/ComponentFieldSet";
 
 export default function AddCar() {
+  const years = Array.from({ length: 2025 - 1990 + 1 }, (_, i) => ({
+    year: (1990 + i).toString(),
+  }));
   const { loading, user } = useContext(AuthContext);
-  console.log(user);
+  const [gettingCar, setGettingCar] = useState([]);
+  const [brandModel, setBrandModel] = useState([]);
+  const [active, setActive] = useState(false);
+  const [userCar, setUserCar] = useState({
+    brand: "",
+    model: "",
+    year: "",
+    price: "",
+  });
+
+  useEffect(() => {
+    const fetchCar = async () => {
+      try {
+        const res = await fetch(allCars, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          console.log(data);
+          setGettingCar(data);
+        } else {
+          console.log("Erro ao buscar carros:", data.msg || data.error);
+          alert("Erro ao buscar carros: " + (data.msg || "Desconhecido"));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchCar();
+  }, []);
+
+  useEffect(() => {
+    if (userCar.brand) {
+      const res = gettingCar.find((e) => {
+        return e.brand === userCar.brand;
+      });
+
+      const formattedModels = res.model.map((m, i) => ({
+        _id: i,
+        model: m,
+      }));
+
+      setBrandModel(formattedModels);
+
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  }, [userCar.brand]);
+
+  const carBrand = (e) => {
+    setUserCar((prev) => ({ ...prev, brand: e.target.value }));
+  };
+
+  const carModel = (e) => {
+    setUserCar((prev) => ({ ...prev, model: e.target.value }));
+  };
+
+  const sendForm = (e) => {
+    e.preventDefault();
+    console.log("Enviando");
+    console.log(userCar);
+    console.log(user);
+  };
+
   return (
     <>
       {loading ? (
         <h1>Loading...</h1>
       ) : user ? (
-        <h1>Cars</h1>
+        <>
+          <div className="w-full h-[calc(100vh-3.75rem)]  bg-blue-200 flex items-center justify-center">
+            <form
+              onSubmit={(e) => sendForm(e)}
+              className="w-full max-w-md bg-white p-6 rounded-xl shadow-lg flex flex-col gap-3"
+            >
+              {TypeSelect({
+                html_for: "brand",
+                textFor: "Choose Make: ",
+                dataArray: gettingCar,
+                valueKey: "brand",
+                onChange: carBrand,
+                disabled: true,
+              })}
+
+              {TypeSelect({
+                html_for: "Model",
+                textFor: "Choose Model: ",
+                dataArray: brandModel,
+                valueKey: "model",
+                onChange: carModel,
+                disabled: active,
+              })}
+
+              {TypeSelect({
+                html_for: "Year",
+                textFor: "Choose Year: ",
+                dataArray: years,
+                valueKey: "year",
+                onChange: (e) =>
+                  setUserCar((prev) => ({ ...prev, year: e.target.value })),
+                disabled: true,
+              })}
+
+              <CompFieldSet
+                Label="Price"
+                name="price"
+                Type="text"
+                PlaceHolder="Enter Price"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // permite só números e ponto (para decimais)
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    setUserCar((prev) => ({ ...prev, price: value }));
+                  }
+                }}
+                value={userCar.price}
+              />
+              <ComptButton btnType="submit" btnText="Add" />
+            </form>
+          </div>
+        </>
       ) : (
         "You need Login first..."
       )}

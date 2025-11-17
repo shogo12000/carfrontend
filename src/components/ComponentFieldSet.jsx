@@ -7,12 +7,12 @@ export default function CompFieldSet({
   onChange,
 }) {
   return (
-    <div>
-      <label className="label">{Label}</label>
+    <div className="w-full flex flex-col ">
+      <label className="label text-black">{Label}</label>
       <input
         type={Type}
         name={name}
-        className="input focus:outline-none"
+        className="input border border-gray-300 rounded-md focus:outline-none w-full"
         placeholder={PlaceHolder}
         value={value}
         onChange={onChange}

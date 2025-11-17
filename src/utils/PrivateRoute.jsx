@@ -8,7 +8,7 @@ export default function PrivateRoute() {
   useEffect(() => {
     checkUserLogin();
   }, []);
-
+ 
  
   if (loading) {
     return <p>Carregando...</p>;
