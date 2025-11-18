@@ -13,6 +13,7 @@ export default function AddCar() {
   const [gettingCar, setGettingCar] = useState([]);
   const [brandModel, setBrandModel] = useState([]);
   const [active, setActive] = useState(false);
+  const [photoFile, setPhotoFile] = useState(null);
   const [userCar, setUserCar] = useState({
     _id: "",
     brand: "",
@@ -77,15 +78,20 @@ export default function AddCar() {
     console.log("Enviando");
     console.log(userCar);
     setUserCar({ ...userCar, _id: user._id });
- 
+
+    const formData = new FormData();
+    formData.append("brand", userCar.brand);
+    formData.append("model", userCar.model);
+    formData.append("year", userCar.year);
+    formData.append("price", userCar.price);
+    formData.append("photo", photoFile); // <-- file enviado
+    formData.append("userId", user._id); // <-- pega o userId do token
+
     try {
       const res = await fetch(addCars, {
         method: "POST",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userCar),
+        body: formData,
       });
 
       const data = await res.json();
@@ -101,6 +107,30 @@ export default function AddCar() {
       console.log(err);
       alert("error saving car...");
     }
+
+    // try {
+    //   const res = await fetch(addCars, {
+    //     method: "POST",
+    //     credentials: "include",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(userCar),
+    //   });
+
+    //   const data = await res.json();
+    //   if (res.ok) {
+    //     alert("Carro adicionado com sucesso!");
+    //     // opcional: resetar form
+    //     setUserCar({ _id: "", brand: "", model: "", year: "", price: "" });
+    //   } else {
+    //     console.log(data);
+    //     alert("Erro: " + (data.msg || "Desconhecido"));
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   alert("error saving car...");
+    // }
   };
 
   return (
@@ -113,6 +143,7 @@ export default function AddCar() {
             <form
               onSubmit={(e) => sendForm(e)}
               className="w-full max-w-md bg-white p-6 rounded-xl shadow-lg flex flex-col gap-3"
+              encType="multipart/form-data"
             >
               {TypeSelect({
                 html_for: "brand",
@@ -158,6 +189,18 @@ export default function AddCar() {
                   }
                 }}
                 value={userCar.price}
+              />
+
+              <CompFieldSet
+                Label="Photo"
+                Type="file"
+                name="photo"
+                PlaceHolder="Photo"
+                accept="image/*"
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                  setPhotoFile(e.target.files[0]);
+                }}
               />
               <ComptButton btnType="submit" btnText="Add" />
             </form>

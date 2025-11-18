@@ -5,6 +5,7 @@ export default function CompFieldSet({
   PlaceHolder,
   value,
   onChange,
+  accept
 }) {
   return (
     <div className="w-full flex flex-col ">
@@ -16,6 +17,7 @@ export default function CompFieldSet({
         placeholder={PlaceHolder}
         value={value}
         onChange={onChange}
+        accept={accept}
       />
     </div>
   );

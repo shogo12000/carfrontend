@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { userCars } from "../utils/local"
+import { userCars, photo } from "../utils/local";
 
 export default function MyCars() {
   const { loading, user } = useContext(AuthContext);
   const [loadingCar, setLoadingCar] = useState(true);
+  const [cars, setCars] = useState([]);
 
   useEffect(() => {
     const userCar = async () => {
@@ -16,7 +17,8 @@ export default function MyCars() {
         });
         const data = await res.json();
         if (res.ok) {
-          console.log(res);
+          console.log(data);
+          setCars(data);
         } else {
           alert(res.msg);
         }
@@ -25,7 +27,7 @@ export default function MyCars() {
       } catch (err) {
         console.log(err);
         alert("error saving car...");
-      }finally{
+      } finally {
         setLoadingCar(false);
       }
     };
@@ -34,9 +36,30 @@ export default function MyCars() {
   }, []);
   return (
     <>
-      {user ? 
-         loadingCar ? <h1>Loading Car</h1>:"Show Car"
-       : (
+      {user ? (
+        loadingCar ? (
+          <h1>Loading Car</h1>
+        ) : (
+          <>
+            <div className="flex flex-wrap gap-4">
+              {cars.map((car) => (
+                <div key={car._id} className="border p-4 rounded">
+                  <h2>
+                    {car.brand} {car.model}
+                  </h2>
+                  <p>Year: {car.year}</p>
+                  <p>Price: ${car.price}</p>
+                  <img
+                    src={`${photo}${car.photo}`}
+                    alt={`${car.brand} ${car.model}`}
+                    className="w-64 h-40 object-cover"
+                  />
+                </div>
+              ))}
+            </div>{" "}
+          </>
+        )
+      ) : (
         "You need Login first..."
       )}
     </>
