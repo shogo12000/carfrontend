@@ -5,6 +5,7 @@ function TypeSelect({
   valueKey,
   onChange,
   disabled,
+  value,
 }) { 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -12,6 +13,7 @@ function TypeSelect({
       <select
         name={html_for}
         id={html_for}
+        value={value}
         onChange={onChange}
         disabled={!disabled}
         className="border border-gray-300 rounded-md p-2"

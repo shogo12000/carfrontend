@@ -14,6 +14,7 @@ export default function AddCar() {
   const [brandModel, setBrandModel] = useState([]);
   const [active, setActive] = useState(false);
   const [userCar, setUserCar] = useState({
+    _id: "",
     brand: "",
     model: "",
     year: "",
@@ -71,11 +72,34 @@ export default function AddCar() {
     setUserCar((prev) => ({ ...prev, model: e.target.value }));
   };
 
-  const sendForm = (e) => {
+  const sendForm = async (e) => {
     e.preventDefault();
     console.log("Enviando");
     console.log(userCar);
-    console.log(user);
+    setUserCar({ ...userCar, _id: user._id });
+ 
+    try {
+      const res = await fetch("http://localhost:3000/cars/addcar", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userCar),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("Carro adicionado com sucesso!");
+        // opcional: resetar form
+        setUserCar({ _id: "", brand: "", model: "", year: "", price: "" });
+      } else {
+        alert("Erro: " + (data.msg || "Desconhecido"));
+      }
+    } catch (err) {
+      console.log(err);
+      alert("error saving car...");
+    }
   };
 
   return (
@@ -96,6 +120,7 @@ export default function AddCar() {
                 valueKey: "brand",
                 onChange: carBrand,
                 disabled: true,
+                value: userCar.brand,
               })}
 
               {TypeSelect({
@@ -105,6 +130,7 @@ export default function AddCar() {
                 valueKey: "model",
                 onChange: carModel,
                 disabled: active,
+                value: userCar.model,
               })}
 
               {TypeSelect({
@@ -115,6 +141,7 @@ export default function AddCar() {
                 onChange: (e) =>
                   setUserCar((prev) => ({ ...prev, year: e.target.value })),
                 disabled: true,
+                value: userCar.year,
               })}
 
               <CompFieldSet
