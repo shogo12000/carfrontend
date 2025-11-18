@@ -14,4 +14,4 @@ export const regForm = "https://project-car-back-end.vercel.app/cars/register";
 export const allCars = "https://project-car-back-end.vercel.app/cars/cars";
 export const addCars = "https://project-car-back-end.vercel.app/cars/addcar";
 export const userCars = "https://project-car-back-end.vercel.app/cars/usercar";
-export const photo = "https://project-car-back-end.vercel.app/"
+export const photo = "https://project-car-back-end.vercel.app/uploads/car_photos/"
