@@ -99,6 +99,7 @@ export default function AddCar() {
         alert("Carro adicionado com sucesso!");
         // opcional: resetar form
         setUserCar({ _id: "", brand: "", model: "", year: "", price: "" });
+        setPhotoFile(null);
       } else {
         console.log(data);
         alert("Erro: " + (data.msg || "Desconhecido"));
@@ -201,6 +202,7 @@ export default function AddCar() {
                   console.log(e.target.files[0]);
                   setPhotoFile(e.target.files[0]);
                 }}
+                ref={photoFile}
               />
               <ComptButton btnType="submit" btnText="Add" />
             </form>

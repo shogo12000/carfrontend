@@ -5,7 +5,7 @@
 // export const allCars = "http://localhost:3000/cars/cars";
 // export const addCars = "http://localhost:3000/cars/addcar";
 // export const userCars = "http://localhost:3000/cars/usercar";
- 
+// export const showAllCars = "http://localhost:3000/cars/allcar";
 
 export const fetchCheckUserLogin = "https://project-car-back-end.vercel.app/cars/userstatus";
 export const fetchLogout = "https://project-car-back-end.vercel.app/cars/logout";
@@ -14,3 +14,4 @@ export const regForm = "https://project-car-back-end.vercel.app/cars/register";
 export const allCars = "https://project-car-back-end.vercel.app/cars/cars";
 export const addCars = "https://project-car-back-end.vercel.app/cars/addcar";
 export const userCars = "https://project-car-back-end.vercel.app/cars/usercar";
+export const showAllCars = "https://project-car-back-end.vercel.app/cars/allcar";

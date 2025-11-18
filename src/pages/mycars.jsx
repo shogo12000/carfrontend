@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { userCars } from "../utils/local";
+import ShowCars from "../utils/ShowCar";
 
 export default function MyCars() {
   const { loading, user } = useContext(AuthContext);
@@ -41,22 +42,7 @@ export default function MyCars() {
           <h1>Loading Carss</h1>
         ) : (
           <>
-            <div className="flex flex-wrap gap-4">
-              {cars.map((car) => (
-                <div key={car._id} className="border p-4 rounded">
-                  <h2>
-                    {car.brand} {car.model}
-                  </h2>
-                  <p>Year: {car.year}</p>
-                  <p>Price: ${car.price} </p>
-                  <img
-                    src={`${car.photo}`}
-                    alt={`${car.brand} ${car.model}`}
-                    className="w-64 h-40 object-cover"
-                  />
-                </div>
-              ))}
-            </div>{" "}
+            <ShowCars cars={cars}/>
           </>
         )
       ) : (
