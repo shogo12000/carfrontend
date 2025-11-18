@@ -38,7 +38,7 @@ export default function MyCars() {
     <>
       {user ? (
         loadingCar ? (
-          <h1>Loading Cars</h1>
+          <h1>Loading Car</h1>
         ) : (
           <>
             <div className="flex flex-wrap gap-4">
