@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { allCars } from "../utils/local";
+import { allCars, addCars } from "../utils/local";
 import TypeSelect from "../components/TypeSelect";
 import ComptButton from "../components/ComponentButton";
 import CompFieldSet from "../components/ComponentFieldSet";
@@ -79,7 +79,7 @@ export default function AddCar() {
     setUserCar({ ...userCar, _id: user._id });
  
     try {
-      const res = await fetch("http://localhost:3000/cars/addcar", {
+      const res = await fetch(addCars, {
         method: "POST",
         credentials: "include",
         headers: {
