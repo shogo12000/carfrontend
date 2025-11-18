@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { userCars, photo } from "../utils/local";
+import { userCars } from "../utils/local";
 
 export default function MyCars() {
   const { loading, user } = useContext(AuthContext);
@@ -50,7 +50,7 @@ export default function MyCars() {
                   <p>Year: {car.year}</p>
                   <p>Price: ${car.price}</p>
                   <img
-                    src={`${photo}${car.photo}`}
+                    src={`${car.photo}`}
                     alt={`${car.brand} ${car.model}`}
                     className="w-64 h-40 object-cover"
                   />
