@@ -38,7 +38,7 @@ export default function MyCars() {
     <>
       {user ? (
         loadingCar ? (
-          <h1>Loading Car</h1>
+          <h1>Loading Cars</h1>
         ) : (
           <>
             <div className="flex flex-wrap gap-4">
@@ -48,7 +48,7 @@ export default function MyCars() {
                     {car.brand} {car.model}
                   </h2>
                   <p>Year: {car.year}</p>
-                  <p>Price: ${car.price}</p>
+                  <p>Price: ${car.price} </p>
                   <img
                     src={`${car.photo}`}
                     alt={`${car.brand} ${car.model}`}
