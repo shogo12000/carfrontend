@@ -94,6 +94,7 @@ export default function AddCar() {
         // opcional: resetar form
         setUserCar({ _id: "", brand: "", model: "", year: "", price: "" });
       } else {
+        console.log(data);
         alert("Erro: " + (data.msg || "Desconhecido"));
       }
     } catch (err) {
@@ -153,7 +154,7 @@ export default function AddCar() {
                   const value = e.target.value;
                   // permite só números e ponto (para decimais)
                   if (/^\d*\.?\d*$/.test(value)) {
-                    setUserCar((prev) => ({ ...prev, price: value }));
+                    setUserCar((prev) => ({ ...prev, price: Number(value) }));
                   }
                 }}
                 value={userCar.price}
