@@ -7,6 +7,7 @@ import { AuthProvider } from "../context/AuthContext";
 import MyCars from "../pages/mycars";
 import PrivateRoute from "../utils/PrivateRoute";
 import AddCar from "../pages/addcar";
+import EditPage from "../pages/edit";
 
 export default function FRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function FRoutes() {
             <Route element={<PrivateRoute />}>
               <Route path="/mycars" element={<MyCars />} />
               <Route path="/addcar" element={<AddCar />} />
+              <Route path="/edit/:id" element={<EditPage />} />
             </Route>
           </Route>
         </Routes>

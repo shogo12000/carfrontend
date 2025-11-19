@@ -4,6 +4,7 @@ import { allCars, addCars } from "../utils/local";
 import TypeSelect from "../components/TypeSelect";
 import ComptButton from "../components/ComponentButton";
 import CompFieldSet from "../components/ComponentFieldSet";
+import FormCar from "../utils/formCar";
 
 export default function AddCar() {
   const years = Array.from({ length: 2025 - 1990 + 1 }, (_, i) => ({
@@ -73,6 +74,23 @@ export default function AddCar() {
     setUserCar((prev) => ({ ...prev, model: e.target.value }));
   };
 
+  const carYears = (e) => {
+    setUserCar((prev) => ({ ...prev, year: e.target.value }));
+  };
+
+  const carPrice = (e) => {
+    const value = e.target.value;
+    // permite só números e ponto (para decimais)
+    if (/^\d*\.?\d*$/.test(value)) {
+      setUserCar((prev) => ({ ...prev, price: Number(value) }));
+    }
+  };
+
+  const carPhoto = (e) => {
+    console.log(e.target.files[0]);
+    setPhotoFile(e.target.files[0]);
+  };
+
   const sendForm = async (e) => {
     e.preventDefault();
     console.log("Enviando");
@@ -108,30 +126,6 @@ export default function AddCar() {
       console.log(err);
       alert("error saving car...");
     }
-
-    // try {
-    //   const res = await fetch(addCars, {
-    //     method: "POST",
-    //     credentials: "include",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(userCar),
-    //   });
-
-    //   const data = await res.json();
-    //   if (res.ok) {
-    //     alert("Carro adicionado com sucesso!");
-    //     // opcional: resetar form
-    //     setUserCar({ _id: "", brand: "", model: "", year: "", price: "" });
-    //   } else {
-    //     console.log(data);
-    //     alert("Erro: " + (data.msg || "Desconhecido"));
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   alert("error saving car...");
-    // }
   };
 
   return (
@@ -141,7 +135,22 @@ export default function AddCar() {
       ) : user ? (
         <>
           <div className="w-full h-[calc(100vh-3.75rem)]  bg-blue-200 flex items-center justify-center">
-            <form
+            <FormCar
+              encType={"multipart/form-data"}
+              gettingCar={gettingCar}
+              carBrand={carBrand}
+              brandModel={brandModel}
+              userCar={userCar}
+              carModel={carModel}
+              years={years}
+              carYears={carYears}
+              carPrice={carPrice}
+              carPhoto={carPhoto}
+              sendForm={sendForm}
+              active={active}
+              photoFile={photoFile}
+            />
+            {/* <form
               onSubmit={(e) => sendForm(e)}
               className="w-full max-w-md bg-white p-6 rounded-xl shadow-lg flex flex-col gap-3"
               encType="multipart/form-data"
@@ -205,7 +214,7 @@ export default function AddCar() {
                 ref={photoFile}
               />
               <ComptButton btnType="submit" btnText="Add" />
-            </form>
+            </form> */}
           </div>
         </>
       ) : (

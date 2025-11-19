@@ -42,7 +42,7 @@ export default function MyCars() {
           <h1>Loading Carss</h1>
         ) : (
           <>
-            <ShowCars cars={cars}/>
+            <ShowCars cars={cars} edit={true}/>
           </>
         )
       ) : (

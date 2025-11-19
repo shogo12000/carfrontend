@@ -6,7 +6,7 @@ function TypeSelect({
   onChange,
   disabled,
   value,
-}) { 
+}) {  
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <label htmlFor={html_for}>{textFor}</label>
