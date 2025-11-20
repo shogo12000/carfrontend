@@ -19,7 +19,7 @@ export default function CompFieldSet({
         value={value}
         onChange={onChange}
         accept={accept}
-        ref={ref}
+        // ref={ref}
       />
     </div>
   );

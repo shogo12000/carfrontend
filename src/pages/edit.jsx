@@ -2,24 +2,24 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import FormCar from "../utils/formCar";
 import { editCar, allCars, updateCar } from "../utils/local";
- 
+
 export default function EditPage() {
   const years = Array.from({ length: 2025 - 1990 + 1 }, (_, i) => ({
     year: (1990 + i).toString(),
   }));
   const { id } = useParams();
-  const [car, setCar] = useState({});
+ 
 
   const [brandModel, setBrandModel] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [gettingCar, setGettingCar] = useState([]);
-  const [photoFile, setPhotoFile] = useState(null);
+  const [gettingCar, setGettingCar] = useState([]); 
   const [userCar, setUserCar] = useState({
     _id: "abcde",
     brand: "",
     model: "",
     year: "",
     price: "",
+    photoFile: null,
   });
 
   useEffect(() => {
@@ -60,8 +60,7 @@ export default function EditPage() {
   }, []);
 
   const carPhoto = (e) => {
-    console.log(e.target.files[0]);
-    setPhotoFile(e.target.files[0]);
+    setUserCar((prev) => ({ ...prev, photoFile: e.target.files[0] }));
   };
 
   const userBrand = () => {
@@ -75,8 +74,7 @@ export default function EditPage() {
         model: m,
       }));
 
-      setBrandModel(formattedModels);
-      console.log(formattedModels);
+      setBrandModel(formattedModels); 
     }
   };
 
@@ -93,7 +91,7 @@ export default function EditPage() {
     formData.append("model", userCar.model);
     formData.append("year", userCar.year);
     formData.append("price", userCar.price);
-    formData.append("photo", photoFile); // <-- file enviado
+    formData.append("photo", userCar.photoFile); 
     formData.append("userId", userCar._id);
 
     try {
@@ -105,10 +103,9 @@ export default function EditPage() {
 
       const data = await res.json();
 
-      if(res.ok){
-        alert("Carro Adicionado com sucesso")
-      }else {
-        console.log(data);
+      if (res.ok) {
+        alert("Carro Adicionado com sucesso");
+      } else {
         alert("Erro: " + (data.msg || "Unknown"));
       }
     } catch (err) {
@@ -116,16 +113,9 @@ export default function EditPage() {
     }
   };
 
-  const carBrand = (e) => {
-    setUserCar((prev) => ({ ...prev, brand: e.target.value }));
-  };
-
-  const carModel = (e) => {
-    setUserCar((prev) => ({ ...prev, model: e.target.value }));
-  };
-
-  const carYears = (e) => {
-    setUserCar((prev) => ({ ...prev, year: e.target.value }));
+  const editingCar = (e) => {
+    const n = e.target.name;
+    setUserCar((prev) => ({ ...prev, [n]: e.target.value }));
   };
 
   const carPrice = (e) => {
@@ -141,26 +131,23 @@ export default function EditPage() {
   }, [userCar]);
   return (
     <div className="w-full h-[calc(100vh-3.75rem)]  bg-blue-200 flex items-center justify-center">
-      {
-        loading && (
-          <FormCar
-            sendForm={sendForm}
-            gettingCar={gettingCar}
-            carBrand={carBrand}
-            userCar={userCar}
-            brandModel={brandModel}
-            years={years}
-            carModel={carModel}
-            carYears={carYears}
-            carPrice={carPrice}
-            btnText={"update"}
-            encType={"multipart/form-data"}
-            carPhoto={carPhoto}
-            photoFile={photoFile}
-          />
-        )
-        // console.log(brandModel)
-      }
+      {loading && (
+        <FormCar
+          sendForm={sendForm}
+          gettingCar={gettingCar}
+          carBrand={editingCar}
+          userCar={userCar}
+          brandModel={brandModel}
+          years={years}
+          carModel={editingCar}
+          carYears={editingCar}
+          carPrice={carPrice}
+          btnText={"update"}
+          encType={"multipart/form-data"}
+          carPhoto={carPhoto}
+          //photoFile={userCar.photoFile}
+        />
+      )}
     </div>
   );
 }

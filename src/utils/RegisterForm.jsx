@@ -37,8 +37,7 @@ export default function RegisterForm({ ChangeForm }) {
 
       const data = await res.json();
 
-      if (!res.ok) {
-        console.log("Erro:", data);
+      if (!res.ok) { 
         return alert(data.message || "Erro ao registrar");
       }
 

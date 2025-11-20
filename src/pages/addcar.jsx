@@ -30,13 +30,13 @@ export default function AddCar() {
           method: "GET",
           credentials: "include",
         });
-        console.log(res);
+ 
         const data = await res.json();
         if (res.ok) {
-          console.log(data);
+ 
           setGettingCar(data);
         } else {
-          console.log("Erro ao buscar carros:", data.msg || data.error);
+ 
           alert("Erro ao buscar carros: " + (data.msg || "Desconhecido"));
         }
       } catch (err) {
@@ -86,15 +86,12 @@ export default function AddCar() {
     }
   };
 
-  const carPhoto = (e) => {
-    console.log(e.target.files[0]);
+  const carPhoto = (e) => { 
     setPhotoFile(e.target.files[0]);
   };
 
   const sendForm = async (e) => {
-    e.preventDefault();
-    console.log("Enviando");
-    console.log(userCar);
+    e.preventDefault(); 
     setUserCar({ ...userCar, _id: user._id });
 
     const formData = new FormData();
@@ -118,12 +115,10 @@ export default function AddCar() {
         // opcional: resetar form
         setUserCar({ _id: "", brand: "", model: "", year: "", price: "" });
         setPhotoFile(null);
-      } else {
-        console.log(data);
+      } else { 
         alert("Erro: " + (data.msg || "Desconhecido"));
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err) { 
       alert("error saving car...");
     }
   };
@@ -150,71 +145,6 @@ export default function AddCar() {
               active={active}
               photoFile={photoFile}
             />
-            {/* <form
-              onSubmit={(e) => sendForm(e)}
-              className="w-full max-w-md bg-white p-6 rounded-xl shadow-lg flex flex-col gap-3"
-              encType="multipart/form-data"
-            >
-              {TypeSelect({
-                html_for: "brand",
-                textFor: "Choose Make: ",
-                dataArray: gettingCar,
-                valueKey: "brand",
-                onChange: carBrand,
-                disabled: true,
-                value: userCar.brand,
-              })}
-
-              {TypeSelect({
-                html_for: "Model",
-                textFor: "Choose Model: ",
-                dataArray: brandModel,
-                valueKey: "model",
-                onChange: carModel,
-                disabled: active,
-                value: userCar.model,
-              })}
-
-              {TypeSelect({
-                html_for: "Year",
-                textFor: "Choose Year: ",
-                dataArray: years,
-                valueKey: "year",
-                onChange: (e) =>
-                  setUserCar((prev) => ({ ...prev, year: e.target.value })),
-                disabled: true,
-                value: userCar.year,
-              })}
-
-              <CompFieldSet
-                Label="Price"
-                name="price"
-                Type="text"
-                PlaceHolder="Enter Price"
-                onChange={(e) => {
-                  const value = e.target.value;
-                  // permite só números e ponto (para decimais)
-                  if (/^\d*\.?\d*$/.test(value)) {
-                    setUserCar((prev) => ({ ...prev, price: Number(value) }));
-                  }
-                }}
-                value={userCar.price}
-              />
-
-              <CompFieldSet
-                Label="Photo"
-                Type="file"
-                name="photo"
-                PlaceHolder="Photo"
-                accept="image/*"
-                onChange={(e) => {
-                  console.log(e.target.files[0]);
-                  setPhotoFile(e.target.files[0]);
-                }}
-                ref={photoFile}
-              />
-              <ComptButton btnType="submit" btnText="Add" />
-            </form> */}
           </div>
         </>
       ) : (

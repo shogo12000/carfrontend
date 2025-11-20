@@ -10,7 +10,7 @@ export default function ShowCars({ cars, edit }) {
         {cars.map((car) => (
           
           <div key={car._id} className="border p-4 rounded">
-            {console.log(car)}
+ 
             <h2>
               {car.brand} {car.model}
             </h2>

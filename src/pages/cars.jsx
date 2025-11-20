@@ -18,7 +18,7 @@ export default function Cars() {
         const data = await res.json();
 
         if (res.ok) {
-          console.log(data);
+  
           setCars(data);
         } else {
           alert(res.msg);

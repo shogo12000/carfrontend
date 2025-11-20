@@ -20,8 +20,7 @@ export default function LoginForm({ ChangeForm }) {
     }
   }, [user]); 
 
-  const handleLogin = async () => {
-    console.log(loginForm);
+  const handleLogin = async () => { 
 
     try { 
       const res = await fetch(

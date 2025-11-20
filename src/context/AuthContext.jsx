@@ -18,12 +18,12 @@ export function AuthProvider({ children }) {
       });
 
       const data = await res.json();
-
+ 
       if (res.ok) {
         setUser(data.user || null);
       } else {
         setUser(null);
-        console.log("Anonymous User");
+        console.log(data.msg);  
       }
     } catch (err) {
       console.log("User is not logged");
@@ -41,8 +41,7 @@ export function AuthProvider({ children }) {
       });
 
       if (res.ok) {
-        setUser(null);
-        console.log("Logout success");
+        setUser(null); 
       } else {
         console.log("Logout error");
       }

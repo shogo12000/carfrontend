@@ -17,14 +17,12 @@ export default function MyCars() {
           credentials: "include",
         });
         const data = await res.json();
-        if (res.ok) {
-          console.log(data);
+        if (res.ok) { 
           setCars(data);
         } else {
           alert(res.msg);
         }
-
-        console.log(data);
+ 
       } catch (err) {
         console.log(err);
         alert("error saving car...");

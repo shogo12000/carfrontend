@@ -33,10 +33,11 @@ export default function FormCar({
         onChange: carBrand,
         disabled: true,
         value: userCar.brand,
+ 
       })}
 
       {TypeSelect({
-        html_for: "Model",
+        html_for: "model",
         textFor: "Choose Model: ",
         dataArray: brandModel,
         valueKey: "model",
@@ -46,7 +47,7 @@ export default function FormCar({
       })}
 
       {TypeSelect({
-        html_for: "Year",
+        html_for: "year",
         textFor: "Choose Year: ",
         dataArray: years,
         valueKey: "year",
@@ -67,11 +68,11 @@ export default function FormCar({
         <CompFieldSet
           Label="Photo"
           Type="file"
-          name="photo"
+          name="photoFile"
           PlaceHolder="Photo"
           accept="image/*"
           onChange={carPhoto}
-          ref={photoFile} 
+          // ref={photoFile} 
         />
 
       <ComptButton btnType="submit" btnText={btnText ? btnText: "Add"} />
