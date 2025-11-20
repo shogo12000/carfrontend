@@ -19,4 +19,4 @@ export const addCars = "https://project-car-back-end.vercel.app/cars/addcar";
 export const userCars = "https://project-car-back-end.vercel.app/cars/usercar";
 export const showAllCars = "https://project-car-back-end.vercel.app/cars/allcar";
 export const editCar = "https://project-car-back-end.vercel.app/cars/editcar/";
-export const addCarsteste = "https://project-car-back-end.vercel.app/cars/updatecar";
+export const updateCar = "https://project-car-back-end.vercel.app/cars/updatecar";
